@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="${angular_loading_bar}"/>
 
 
-
 <!--  javaScript -->
 <c:url var="angular" 			 value="/node_modules/angular/angular.js"/>
 <c:url var="jquery" 			 value="/node_modules/jquery/dist/jquery.js"/>

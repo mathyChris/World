@@ -9,9 +9,8 @@
 
 <head>
 
-
+<!-- test -->
 <title><sitemesh:write property='title'/></title>
-
 
     <sitemesh:write property='head'/>
 
