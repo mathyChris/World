@@ -8,6 +8,7 @@
   <mapping path="/study/*" decorator="/decorators/menu.jsp"/>
 <!--   <mapping path="/*.special.jsp" decorator="/special-decorator.html"/> -->
 
+
   <!-- Alternative convention. This is more verbose but allows multiple decorators
        to be applied to a single path. -->
 <!--   <mapping> -->
