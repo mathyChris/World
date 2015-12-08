@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+ 
+	<!-- Appender, Layout 설정 -->
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+		    
+			<PatternLayout pattern="%d %5p [%c] %m%n"/>
+			
+		</Console>
+		
+<!-- 		<File name="MyFile" fileName="app.log"> -->
+		    
+<!-- 	  		<PatternLayout pattern="%d %5p [%c] %m%n"/> -->
+	  		
+<!-- 	    </File> -->
+		
+	</Appenders>
+ 
+	<!-- Logger 설정 -->
+<!-- 	TRACE, DEBUG, INFO, WARN, ERROR, FATAL -->
+	<Loggers>
+	    
+		<Root level="INFO">
+		    
+<!-- 		<Root level="DEBUG"> -->
+<!-- 		<Root level="TRACE"> -->
+
+			<AppenderRef ref="console"/>
+<!-- 			<AppenderRef ref="MyFile"/> -->
+		</Root>
+		
+	<Logger name="org.springframework.jdbc.datasource" level="DEBUG">
+<!-- 	    org.springframework.jdbc.datasource하면 이 후 추가되는 부분에 대하여 DEBUG 모드로 tracing 할 수 있다. -->
+<!-- 	 org.springframework.jdbc.datasource.DataSourceTransactionManager와 같이 특정 부분을 보고자 할 때, name안에 넣는다.  -->
+<!-- 	    <AppenderRef ref="console"/> --> <!-- 이 부분이 추가되면 한줄씩 중복되어 출력 -->  
+	</Logger>
+	
+	<logger name="com.hybrid.mapper" level="DEBUG"/>
+		
+	</Loggers>
+ 
+</Configuration>
