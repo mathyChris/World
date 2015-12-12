@@ -8,9 +8,13 @@
 
 <!-- css -->
 <c:url var="bootstrap" 			 value="/node_modules/bootstrap/dist/css/bootstrap.css"/>  <!-- server 에서 동작  -->
+<c:url var="font_awesome" 	     value="/node_modules/font-awesome/css/font-awesome.css"/> 
+<c:url var="metismenu" 			 value="/node_modules/metismenu/dist/metisMenu.css"/> 
 <c:url var="angular_loading_bar" value="/node_modules/angular-loading-bar/build/loading-bar.css"/> 
 
 <link rel="stylesheet" href="${bootstrap}"/>
+<link rel="stylesheet" href="${font_awesome}"/>
+<link rel="stylesheet" href="${metismenu}"/>
 <link rel="stylesheet" href="${angular_loading_bar}"/>
 
 
@@ -18,6 +22,8 @@
 <c:url var="angular" 			 value="/node_modules/angular/angular.js"/>
 <c:url var="jquery" 			 value="/node_modules/jquery/dist/jquery.js"/>
 <c:url var="bootstrap_js" 		 value="/node_modules/bootstrap/dist/js/bootstrap.js"/> <!-- drop-down 기능 등 bootstrap의 동적 부분 -->
+<c:url var="metismenu_js" 		 value="/node_modules/metismenu/dist/metisMenu.js"/>
+
 
 <c:url var="angular_route" 		 value="/node_modules/angular-route/angular-route.js"/>
 <c:url var="angular_animate" 	 value="/node_modules/angular-animate/angular-animate.js"/>
@@ -29,24 +35,12 @@
 <script type="text/javascript" src="${angular}"></script>
 <script type="text/javascript" src="${jquery}"></script>
 <script type="text/javascript" src="${bootstrap_js}"></script>
+<script type="text/javascript" src="${metismenu_js}"></script>
 
 <script type="text/javascript" src="${angular_route}"></script>
 <script type="text/javascript" src="${angular_animate}"></script>
 <script type="text/javascript" src="${angular_touch}"></script>
 <script type="text/javascript" src="${angular_loading_bar}"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place searches</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+/*         height: 100%; */
+		height : 50% ;
+		width : 50%; 
+      }
+    </style>
+
+  </head>
+  <body>
+  
+  
+    <div id="floating-panel">
+      <input id="place" type="text">
+      <input id="type" type="text" >
+      <input id="submit" type="button" value="Search">
+    </div>
+    
+
+  
+    <div id="map">  
+    
+    	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBJgr932MqoEUFSo0u5NDb2OZu9DuBPVg&signed_in=true&libraries=places&callback=initMap" async defer></script>
+   
+    </div>
+    
+ 
+ 
+ 	    <script>
+ 	    
+			var map;
+			var infowindow;
+			
+			function initMap() {
+			//   var pyrmont = {lat: -33.867, lng: 151.195};
+			//	37.497912, 127.027571
+			
+				var kangnam = {lat : 37.497912 , lng : 127.027571} ; 
+			
+			  map = new google.maps.Map(document.getElementById('map'), {
+			    center: kangnam ,
+			    zoom: 15
+			    
+			  });
+			  
+			  
+			
+			  infowindow = new google.maps.InfoWindow();
+			
+			  var service = new google.maps.places.PlacesService(map);
+			  
+			  var place = document.getElementById('place').value;
+			  var type = document.getElementById('type').value;
+			  
+			  document.getElementById('submit').addEventListener('click', function() {
+				  
+				  
+				  map = new google.maps.Map(document.getElementById('map'), {
+					  
+						    center: place ,
+						    zoom: 15
+						    
+				  });
+
+				  service.nearbySearch({
+
+					  		location: kangnam,
+						    radius: 500,
+						    types: [type]
+						  }, callback);
+				  
+				  });
+			  
+			  }
+			
+		
+			
+			
+			function callback(results, status) {
+			  if (status === google.maps.places.PlacesServiceStatus.OK) {
+			    for (var i = 0; i < results.length; i++) {
+			      createMarker(results[i]);
+			    }
+			  }
+			}
+			
+			function createMarker(place) {
+			  var placeLoc = place.geometry.location;
+			  var marker = new google.maps.Marker({
+			    map: map,
+			    position: place.geometry.location
+			  });
+			
+			  google.maps.event.addListener(marker, 'click', function() {
+			    infowindow.setContent(place.name);
+			    infowindow.open(map, this);
+			  });
+			}
+
+    </script>
+ 
+ 
+ 
+  </body>
+</html>
+
+
+

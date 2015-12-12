@@ -1,0 +1,104 @@
+{
+  "name": "metismenu",
+  "version": "2.2.0",
+  "description": "A jQuery menu plugin",
+  "main": "./dist/metisMenu.js",
+  "scripts": {
+    "test": "grunt travis --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onokumus/metisMenu.git"
+  },
+  "keywords": [
+    "twitter",
+    "bootstrap",
+    "twbs",
+    "jquery",
+    "menu",
+    "accordion",
+    "toggle",
+    "metis",
+    "metisMenu"
+  ],
+  "author": {
+    "name": "Osman Nuri Okumuş",
+    "email": "onokumus@gmail.com",
+    "url": "https://github.com/onokumus"
+  },
+  "contributors": [
+    {
+      "name": "Osman Nuri Okumuş",
+      "email": "onokumus@gmail.com",
+      "url": "https://github.com/onokumus"
+    },
+    {
+      "name": "Rein de Vries",
+      "email": "info@reinos.nl",
+      "url": "https://github.com/reinos/"
+    },
+    {
+      "name": "Arthur CHAN",
+      "email": "arthur@talkgoal.com",
+      "url": "http://catchtop.com"
+    },
+    {
+      "name": "Andrew Eastwood",
+      "url": "https://github.com/AndrewEastwood"
+    },
+    {
+      "name": "Marcelo Tosco",
+      "email": "capy.net@gmail.com",
+      "url": "http://ecapy.com"
+    },
+    {
+      "name": "Radoslav Štofko",
+      "url": "http://www.stoweb.cz"
+    },
+    {
+      "name": "Umut Karcı",
+      "email": "umutkarci@std.sehir.edu.tr"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/onokumus/metisMenu/issues"
+  },
+  "homepage": "https://github.com/onokumus/metisMenu#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.0.3",
+    "cssnano": "^3.2.0",
+    "grunt": "^0.4.5",
+    "grunt-banner": "^0.5.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "0.6.1",
+    "grunt-postcss": "^0.6.0",
+    "pixrem": "^3.0.0"
+  },
+  "gitHead": "aaa0c7c25eabef21851455cacf2345d07acbe429",
+  "_id": "metismenu@2.2.0",
+  "_shasum": "6618e34e64cfaec61c9543e68850a01807aab777",
+  "_from": "metismenu@*",
+  "_npmVersion": "2.14.3",
+  "_nodeVersion": "0.12.7",
+  "_npmUser": {
+    "name": "onokumus",
+    "email": "onokumus@gmail.com"
+  },
+  "dist": {
+    "shasum": "6618e34e64cfaec61c9543e68850a01807aab777",
+    "tarball": "http://registry.npmjs.org/metismenu/-/metismenu-2.2.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "onokumus",
+      "email": "onokumus@gmail.com"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/metismenu/-/metismenu-2.2.0.tgz",
+  "readme": "ERROR: No README data found!"
+}

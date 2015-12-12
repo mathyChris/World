@@ -8,6 +8,16 @@
   <mapping path="/study/*" decorator="/decorators/menu.jsp"/>
    <mapping path="/jsp/city/main.jsp" decorator="/decorators/menu.jsp"/>
    <mapping path="/jsp/country/main.jsp" decorator="/decorators/menu.jsp"/>
+   
+   
+   <mapping path="/jsp/city/main.jsp" decorator="/decorators/menu_sider.jsp"/>
+   <mapping path="/jsp/country/main.jsp" decorator="/decorators/menu_sider.jsp"/>
+   
+   <mapping path="/halfSlider/index.jsp" decorator="/decorators/menu.jsp"/>
+   <mapping path="/stylishPortfolio/index.jsp" decorator="/decorators/menu.jsp"/>
+   
+    <mapping path="/study/*" decorator="/decorators/menu_sider.jsp"/>
+<!--     <mapping path="/businessCasual/index.jsp" decorator="/decorators/menu.jsp"/> -->
 <!--   <mapping path="/*.special.jsp" decorator="/special-decorator.html"/> -->
 
 
