@@ -49,13 +49,17 @@
 
 	function initialize() {
 	  directionsDisplay = new google.maps.DirectionsRenderer();
+	  
 	  var kangnam = new google.maps.LatLng(37.497912, 127.027571); //var kangnam = {lat : 37.497912 , lng : 127.027571} ; 
+	  
 	  var mapOptions = {
 		zoom:17,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		center: kangnam
 	  }
+	  
 	  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	  
 	  directionsDisplay.setMap(map);
 	}
 

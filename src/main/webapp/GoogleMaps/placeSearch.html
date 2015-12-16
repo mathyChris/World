@@ -11,9 +11,7 @@
         padding: 0;
       }
       #map {
-/*         height: 100%; */
-		height : 50% ;
-		width : 50%; 
+        height: 100%;
       }
     </style>
     <script>
@@ -21,33 +19,24 @@ var map;
 var infowindow;
 
 function initMap() {
-//   var pyrmont = {lat: -33.867, lng: 151.195};
-//	37.497912, 127.027571
-
-	var kangnam = {lat : 37.497912 , lng : 127.027571} ; 
+  var gangnam = {lat: 37.497912, lng: 127.027571}; // 37.497912, 127.027571
 
   map = new google.maps.Map(document.getElementById('map'), {
-//     center: pyrmont,
-    center: kangnam,
+    center: gangnam,
     zoom: 15
   });
-  
-  
 
   infowindow = new google.maps.InfoWindow();
 
   var service = new google.maps.places.PlacesService(map);
-  
   service.nearbySearch({
-//     location: pyrmont,
-    location: kangnam,
+    location: gangnam,
     radius: 500,
-    types: ['hospital']
+//     types: ['lodging'], 
+  	types: ['food']
+//     name : ['피자']
   }, callback);
 }
-
-
-
 
 function callback(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -73,17 +62,7 @@ function createMarker(place) {
     </script>
   </head>
   <body>
-  
-    <div id="map">  
-    
-    	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBJgr932MqoEUFSo0u5NDb2OZu9DuBPVg&signed_in=true&libraries=places&callback=initMap" async defer></script>
-   
-    </div>
-    
-<!--     <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script> -->
- 
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9zc7f3nY1hhjEex7pz3R9cHruDyaLVqk&signed_in=true&libraries=places&callback=initMap" async defer></script>
   </body>
 </html>
-
-
-

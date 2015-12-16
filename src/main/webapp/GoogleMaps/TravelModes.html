@@ -32,13 +32,16 @@
   <body>
   
     <div id="floating-panel">
+    
 	    <b> Travel Mode </b>
+	    
 	    <select id="mode">
 	      <option value="DRIVING">Driving</option>
 	      <option value="WALKING">Walking</option>
 	      <option value="BICYCLING">Bicycling</option>
 	      <option value="TRANSIT">Transit</option>
 	    </select>
+	    
 	    <input id="submit" type="button" value="Search" /> <br>
 	    	<b>Start: </b>
 				<input type="text" id="start" />
@@ -60,21 +63,19 @@
 		  var map = new google.maps.Map(document.getElementById('map'), {
 		    zoom: 14,
 		    center: {lat: 37.497912, lng: 127.027571}
-		//     37.497912, 127.027571
-		
+		//     37.497912, 127.02757
+		    
+		  });
+		  
+		 
+		  directionsDisplay.setMap(map);
+			
 		  document.getElementById('submit').addEventListener('click', function() {
 			  
 			  calculateAndDisplayRoute(directionsService, directionsDisplay);
 			    
 			  });
-		    
-		  });
-		  
-		  directionsDisplay.setMap(map);
-		
-		  document.getElementById('mode').addEventListener('change', function() {
-		    calculateAndDisplayRoute(directionsService, directionsDisplay);
-		  });
+
 		}
 		
 		
