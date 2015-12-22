@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" session="false" trimDirectiveWhitespaces="true"%>
 
 <!DOCTYPE html>
 <html>
   <head>
     <title>Place searches</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
+    <meta charset="euc-kr">
 
     <style>
     
@@ -34,21 +32,27 @@
 	  padding-left: 10px;
 	}
 	
-/* 	#floating-panel2 {
-	  position: absolute;
-	  top: 10px;
-	  left: 25%;
-	  z-index: 5;
-	  background-color: #fff;
-	  padding: 5px;
-	  border: 1px solid #999;
-	  text-align: center;
+	#right-panel {
 	  font-family: 'Roboto','sans-serif';
 	  line-height: 30px;
 	  padding-left: 10px;
-	} */
+	}
+	
+	#right-panel select, #right-panel input {
+	  font-size: 15px;
+	}
+	
+	#right-panel select {
+	  width: 100%;
+	}
+	
+	#right-panel i {
+	  font-size: 12px;
+	}
+	
 
-    </style> 
+    </style>
+
     
     <div id="floating-panel1">
     
@@ -59,7 +63,7 @@
       <br>
       <!-- <button id="drop" onclick="drop()">Drop Markers</button> -->
       
-      <input onclick="drop();" type=button value="Drop Markers">
+      <input onclick="drop();" type=button value="DE_Recommended">
       <input onclick="clearMarkers();" type=button value="Hide Markers">
       <input onclick="showMarkers();" type=button value="Show All Markers">
       <input onclick="deleteMarkers();" type=button value="Delete Markers">
@@ -79,8 +83,9 @@
 			<b>End: </b>
 				<input type="text" id="end" />	
 		<br>
-		<input id="foodType" type="textbox" value="Input Here" >
-        <input id="submit4" type="button" value="FoodSearch">
+		<!-- <input id="foodType" type="textbox" value="Input Here" > -->
+		<input onclick="searchChick();" type=button value="Chicken">
+        <!-- <input id="submit4" type="button" value="FoodSearch"> -->
 <!--         <input onclick="foodSearch();" type=button value="FoodSearch"> -->
       
     </div>
@@ -199,6 +204,72 @@
 
 
   ];
+  
+  
+  var Insadong = [
+                  
+          		{ lat: 37.561686,  lng: 126.986431}, 
+          		{ lat: 	37.574057, lng:126.985843 }, 
+          		{ lat: 37.564031,  lng: 126.983833 },
+          		{ lat: 37.572023,  lng:126.986449 }, 
+          		{ lat: 37.571705, lng: 126.986566}, 
+          		{ lat: 37.573249, lng: 126.986097 }, 
+          		{ lat: 37.574616, lng: 126.985169 }, 
+          		{ lat: 37.571804, lng: 126.986774 }, 
+          		{ lat: 37.574206, lng: 126.984294 }, 
+          		{ lat: 37.575258, lng: 126.983615}
+
+
+  ];
+  
+  var kyungbokyok = [
+                  
+          		{ lat: 37.579772,  lng: 126.971048}, 
+          		{ lat: 	37.577734, lng:126.971536 }, 
+          		{ lat: 37.5765,  lng: 126.970888 },
+          		{ lat: 37.577822,  lng:126.980505 }, 
+          		{ lat: 37.576099, lng: 126.973327}, 
+          		{ lat: 37.574645, lng: 126.970956 }, 
+          		{ lat: 37.576016, lng: 126.973047 }, 
+          		{ lat: 37.577362, lng: 126.972625 }, 
+          		{ lat: 37.579469, lng: 126.972506 }, 
+          		{ lat: 37.578374, lng: 126.973669}
+
+
+  ];
+  
+  var hongdaeyok = [
+                    
+             		{ lat: 37.548402,  lng: 126.919895}, 
+             		{ lat: 	37.555738, lng:126.925689 }, 
+             		{ lat: 37.551111,  lng: 126.922638},
+             		{ lat: 37.552088,  lng:126.921257 }, 
+             		{ lat: 37.550383, lng: 126.919789}, 
+             		{ lat: 37.552223, lng:126.922645 }, 
+             		{ lat: 37.551371, lng: 126.922032 }, 
+             		{ lat: 37.556202, lng: 126.928236 }, 
+             		{ lat: 37.556385, lng: 126.92978 }, 
+             		{ lat: 37.549406, lng: 126.918513}
+
+
+  ];
+  
+  var gundaeyok = [
+                    
+             		{ lat: 37.540893,  lng:127.070208}, 
+             		{ lat: 37.540558,  lng:127.067067 }, 
+             		{ lat: 37.543116,  lng: 127.070582},
+             		{ lat: 37.542923,  lng:127.071646 }, 
+             		{ lat: 37.542931, lng:127.071645}, 
+             		{ lat: 37.539327, lng:127.067351 }, 
+             		{ lat: 37.542627, lng: 127.071032 }, 
+             		{ lat: 37.538893, lng: 127.07567 }, 
+             		{ lat:37.537762, lng: 127.072598 }, 
+             		{ lat:37.540227, lng:127.06742}
+
+
+  ];
+  
     
     </script>
     
@@ -210,6 +281,8 @@
 		var service ; 
 	    var markers = [] ;
 	    var address ;
+	    var results = [] ; 
+	    var geocoder ;
 
 function initMap() {
 	
@@ -225,24 +298,67 @@ function initMap() {
 	    zoom: 15
 	    
 	  });
+	  
+	  
+////////////////////////////// Transition //////////////////////////////////////////////////////////
 
+
+	  directionsDisplay.setMap(map);
+		
+	  document.getElementById('submit2').addEventListener('click', function() {
+		  
+		  calculateAndDisplayRoute(directionsService, directionsDisplay);
+		    
+	  });
+	 
+
+ //////////////////////////// food search ////////////////////////////////////////////////
  
-  service = new google.maps.places.PlacesService(map);
+/*
   
   document.getElementById('submit4').addEventListener('click', function(){
-  	
+	  
+	 service = new google.maps.places.PlacesService(map);
+	 address = document.getElementById('address').value;
+	 
+	 
+	
   	 var foodType = document.getElementById('foodType').value;
+  	 var geocoder = new google.maps.Geocoder();
+  	 geocoder.geocode({'address': address}, function(results, status) {
+  		 
+  	   if(status === google.maps.GeocoderStatus.OK){
+  	      map.setCenter(results[0].geometry.location);
+  	      
+//   	      var marker = new google.maps.Marker({
+//   	        map: resultsMap,
+//   	        position: results[0].geometry.location
+//   	      });
+  	      
+//   	 }); 
   	
 	  	service.nearbySearch({
-	    location: kangnam,
-	    radius: 500,
+// 	    location: kangnam,
+//      location: slocation,
+		location : results[0].geometry.location, 
+	    radius: 700,
 	    types: ['food'],
 	    name : [foodType] 
 	  }, callback);
+	  	
+  	  }else {
+  		  
+  	      alert('Geocode was not successful for the following reason: ' + status);
+      }
+	  	
+  	 }); 	
+ 
+
   	
-  }); 
-   
-///////////////////////////// 2. add Marker  /////////////////////////////////////////////// 
+  	}); // eventListener
+  */
+ 
+/////////////////////////////   place search   /////////////////////////////////////////////// 
 
   var geocoder = new google.maps.Geocoder();
 
@@ -252,6 +368,9 @@ function initMap() {
     
   });
   
+  
+  //////////////////////////////// add marker///////////////////////////////////////////////////////////
+  
    map.addListener('click', function(event) {
 	   
     addMarker(event.latLng);
@@ -259,8 +378,6 @@ function initMap() {
   });
   
   addMarker();
-  
-  
   
 } // # init end 
 
@@ -329,7 +446,7 @@ function drop() {
 // 	  }
   
   
-  address = document.getElementById('address').value;
+  address = document.getElementById('address').value; // 한글 변환 문제 
   
 	  if(address == "강남역" || address == "gangnam"){
 		  
@@ -341,7 +458,6 @@ function drop() {
 		  
 	  }
 	  else if( address == "잠실역" || address == "jamsil") {
-// 	  else if( address == "jamsil") {	
 		  
 		  for (var i = 0; i < jamsil.length; i++) {
 			  	
@@ -349,7 +465,7 @@ function drop() {
 			  
 		  }
 		  
-	  }else if(  address == "이태원" || address == "itaewon" ){
+	  }else if(  address == "이태원" || address == "itaewon" ){
 	  
 		  	  
 		  for (var i = 0; i < itaewon.length; i++) {
@@ -358,7 +474,7 @@ function drop() {
 			  
 		  }
 		  
-	  }else if( address == "동대문" || address == "dongdaemun" ){
+	  }else if( address == "동대문역" || address == "dongdaemun" ){
 		  	  
 		  for (var i = 0; i < dongdaemun.length; i++) {
 			  	
@@ -366,7 +482,45 @@ function drop() {
 			  
 		  }
 		  
+	  }else if( address == "인사동" || address == "insa dong" ){
+		  	  
+		  for (var i = 0; i < Insadong.length; i++) {
+			  	
+			  addMarkerWithTimeout(Insadong[i], i * 200);
+			  
+		  }
+		  
+	  }else if( address == "경복궁역" || address == "kyungbok station" ){
+		  	  
+		  for (var i = 0; i < kyungbokyok.length; i++) {
+			  	
+			  addMarkerWithTimeout(kyungbokyok[i], i * 200);
+			  
+		  }
+	  }else if( address == "홍대역" || address == "hongdae station" || address == "hongdae" || address == "홍대입구역"){
+		  	  
+		  for (var i = 0; i < hongdaeyok.length; i++) {
+			  	
+			  addMarkerWithTimeout(hongdaeyok[i], i * 200);
+			  
+		  }
+	  }else if( address == "건대역" || address == "gundae station" || address == "gundae" || address == "건대" || address == "건대입구역"){
+		  	  
+		  for (var i = 0; i < gundaeyok.length; i++) {
+			  	
+			  addMarkerWithTimeout(gundaeyok[i], i * 200);
+			  
+		  }
+	  }else if( address == "명동역" || address == "myungdong" || address == "myeongdongyok"){
+		  	  
+		  for (var i = 0; i < myeongdong.length; i++) {
+			  	
+			  addMarkerWithTimeout(myeongdong[i], i * 200);
+			  
+		  }
 	  }
+  
+  //dongdaemunyok
   
 }
 
@@ -394,7 +548,8 @@ function addMarkerWithTimeout(position, timeout) {
 
   function geocodeAddress(geocoder, resultsMap) {	
   	
-    var address = document.getElementById('address').value;
+//     var address = document.getElementById('address').value;
+    address = document.getElementById('address').value;
     
     geocoder.geocode({'address': address}, function(results, status) {
     	
@@ -407,7 +562,7 @@ function addMarkerWithTimeout(position, timeout) {
           position: results[0].geometry.location
         });
         
-       // ì ë³´ íì  ëì°ê¸° -> Kangnam 
+       // Ã¬Â ÂÃ«Â³Â´ Ã­ÂÂÃ¬ÂÂ  Ã«ÂÂÃ¬ÂÂ°ÃªÂ¸Â° -> Kangnam 
         var infowindow = new google.maps.InfoWindow({
   		    content: contentString
   	  });
@@ -426,9 +581,12 @@ function addMarkerWithTimeout(position, timeout) {
 
 
 
+
 ///////////////////////////// food search //////////////////////////////////////////////////
 
- function callback(results, status) {
+ function callback(results, status, pagination) {
+ 	
+ 	alert("callback"); 
 	
   if (status === google.maps.places.PlacesServiceStatus.OK) {
   	
@@ -436,8 +594,10 @@ function addMarkerWithTimeout(position, timeout) {
     	
       createMarker(results[i]);
       
-      
     }
+    
+    createMarkers(results);  
+    
   }
 }
 
@@ -471,6 +631,20 @@ function addMarker2(place ,location) {
 
 //////////////////////////////// commons ///////////////////////////////////////
 
+function addMarker(location) {
+	
+  var marker = new google.maps.Marker({
+  	
+    position: location,
+    map: map
+    
+  });
+  
+  markers.push(marker);
+  
+} 
+
+
 function deleteMarkers() {
 	
   clearMarkers();
@@ -495,13 +669,186 @@ function showMarkers() {
   setMapOnAll(map);
 }
 
-///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// transition ////////////////////////////////////////////////////
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+			
+		  var selectedMode = document.getElementById('mode').value;
+		  var start = document.getElementById('start').value;
+		  var end = document.getElementById('end').value;  
+  
+  		directionsService.route({
+	 	    
+		    origin: start ,
+		    destination: end ,
+		    travelMode: google.maps.TravelMode[selectedMode]
+		    
+		  }, function(response, status) {
+		    if (status == google.maps.DirectionsStatus.OK) {
+		      directionsDisplay.setDirections(response);
+		    } else {
+		      window.alert('Directions request failed due to ' + status);
+		    }
+		  });
+		}
+		
+/////////////////////////////// Pagination / List & Icon ///////////////////////////////
+
+function processResults(results, status, pagination) {
+	
+	  if (status !== google.maps.places.PlacesServiceStatus.OK) {
+	    return;
+	  } else {
+	    createMarkers(results);
+	
+	    if (pagination.hasNextPage) {
+	      var moreButton = document.getElementById('more');
+	
+	      moreButton.disabled = false;
+	
+	      moreButton.addEventListener('click', function() {
+	        moreButton.disabled = true;
+	        pagination.nextPage();
+	      });
+	    }
+	  }
+	}
+
+function createMarkers(places) {
+	
+	  var bounds = new google.maps.LatLngBounds();
+	  var placesList = document.getElementById('places');
+	
+	  for (var i = 0, place; place = places[i]; i++) {
+	    var image = {
+	      url: place.icon,
+	      size: new google.maps.Size(71, 71),
+	      origin: new google.maps.Point(0, 0),
+	      anchor: new google.maps.Point(17, 34),
+	      scaledSize: new google.maps.Size(25, 25)
+	    };
+	
+	    var marker = new google.maps.Marker({
+	      map: map,
+	      icon: image,
+	      title: place.name,
+	      position: place.geometry.location
+	    });
+	    
+	    markers.push(marker);
+	   
+	 	     placesList.innerHTML += '<li>' + place.name + '</li>';
+
+// 		list(place); 
+	    
+	    bounds.extend(place.geometry.location);
+	  }
+	  map.fitBounds(bounds);
+}
 
 
+function list(place){
+	
+// 	clearList() ;
+		
+	placesList.innerHTML += '<li>' + place.name + '</li>';
+		
+	}
+	
+	
+function clearList(){
+	
+// 	placesList.innerHTML += '<li>' +  '</li>';
+	
+}	
+
+
+function searchChick(){
+	  
+	 service = new google.maps.places.PlacesService(map);
+	 address = document.getElementById('address').value;
+	 
+  	 // var foodType = document.getElementById('foodType').value;
+  	 geocoder = new google.maps.Geocoder();
+  	 geocoder.geocode({'address': address}, function(results, status) {
+  		 
+  	   if(status === google.maps.GeocoderStatus.OK){
+  	   	
+  	   	  alert("status"); 
+  	      map.setCenter(results[0].geometry.location);
+  	     
+	  	service.nearbySearch({
+		location : results[0].geometry.location, 
+	    radius: 700,
+	    types: ['food'],
+	    name : ['치킨'] 
+	  }, callback);
+	  	
+  	  }else {
+  		  
+  	      alert('Geocode was not successful for the following reason: ' + status);
+      }
+	  	
+  	 }); 	
+
+}
+
+//////////////////////////////////////////////////////////////////////////
     </script>
+    
+    <style>
+      #right-panel {
+        font-family: Arial, Helvetica, sans-serif;
+        position: absolute;
+        right: 5px;
+        top: 60%;
+        margin-top: -195px;
+        height: 330px;
+        width: 200px;
+        padding: 5px;
+        z-index: 5;
+        border: 1px solid #999;
+        background: #fff;
+      }
+      h2 {
+        font-size: 22px;
+        margin: 0 0 5px 0;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        height: 271px;
+        width: 200px;
+        overflow-y: scroll;
+      }
+      li {
+        background-color: #f1f1f1;
+        padding: 10px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      li:nth-child(odd) {
+        background-color: #fcfcfc;
+      }
+      #more {
+        width: 100%;
+        margin: 5px 0 0 0;
+      }
+    </style>
+    
+    
   </head>
   <body>
     <div id="map"></div>
+    
+    <div id="right-panel">
+      <h2>Results</h2>
+      <ul id="places"></ul>
+      <button id="more">More results</button>
+    </div>
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBJgr932MqoEUFSo0u5NDb2OZu9DuBPVg&signed_in=true&libraries=places&callback=initMap" async defer></script>
   </body>
 </html>

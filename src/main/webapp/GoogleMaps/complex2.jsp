@@ -79,8 +79,8 @@
 				<input type="text" id="end" />	
 		<br>
 		<input id="foodType" type="textbox" value="Input Here" >
-        <!-- <input id="submit4" type="button" value="FoodSearch">	 -->	
-        <input onclick="foodSearch();" type=button value="FoodSearch">
+        <input id="submit4" type="button" value="FoodSearch">
+<!--         <input onclick="foodSearch();" type=button value="FoodSearch"> -->
       
     </div>
     
@@ -205,6 +205,8 @@
     var map ; 
     var markers = [];
     var pos ;
+    var infowindow ; 
+    var service ;
     
    
     
@@ -242,11 +244,37 @@ function initMap() {
 // 		  myLocation();
 		    
 // 	  });
+
+///////////////////////////////// food search /////////////////////////////////////////////
+
+/* 
+	  document.getElementById('submit4').addEventListener('click', function() {
+		  
+		  foodSearch() ; 
+		    
+	  });
+  	 */
+  	 
+ /*  	 
+  	infowindow = new google.maps.InfoWindow();
+  	service = new google.maps.places.PlacesService(map);
   	
-  	
-  	
+	  
+	  document.getElementById('submit4').addEventListener('click', function(){
+	  	
+	  	 var foodType = document.getElementById('foodType').value;
+	  	
+		  	service.nearbySearch({
+		    location: kangnam,
+		    radius: 500,
+		    types: ['food'],
+		    name : [foodType] 
+		  }, callback);
+	  	
+	  }); 
+   */	
   
-  ////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////2. add Marker /////////////////////////////////////////////
   
   var geocoder = new google.maps.Geocoder();
 
@@ -257,37 +285,19 @@ function initMap() {
   });
   
    map.addListener('click', function(event) {
+	   
     addMarker(event.latLng);
+    
   });
   
   addMarker();
-  
-////////////////////////////////////////////////////////////////////////////////////
 
-
-  document.getElementById('submit4').addEventListener('click', function(){
-	  
-	  var infowindow = new google.maps.InfoWindow();
-
-	  var service = new google.maps.places.PlacesService(map);	  
-	  	
-	     clearMarkers() ; 
-	  	
-	  	 var foodType = document.getElementById('foodType').value;
-	  	
-	  	service.nearbySearch({
-	    location: kangnam,
-	    radius: 500,
-	    types: ['food'],
-	    name : [foodType] 
-	  }, callback);
-	  	
-	  }); 
   
-  
-  //////////////////////////Geolocation///////////////////////////////////////////
+  //////////////////////////1. Geolocation///////////////////////////////////////////
  
-   var infoWindow = new google.maps.InfoWindow({map: map});
+//    var infoWindow = new google.maps.InfoWindow({map: map});
+  
+   infoWindow = new google.maps.InfoWindow({map: map});
 
   // Try HTML5 geolocation.
    if (navigator.geolocation) {
@@ -325,6 +335,9 @@ function initMap() {
 
  ///////////////////////// ### init end 
  
+ 
+ ////////////////////////// 3. my location //////////////////////////// 
+ 
  function myLocatin(){
 	
 	var infoWindow = new google.maps.InfoWindow({map: map});
@@ -357,44 +370,8 @@ function initMap() {
   }
 
 }
- 
- 
-/////////////////////////////////////////////////////////////////////////
 
-// Adds a marker to the map and push to the array.
-function addMarker(location) {
-  var marker = new google.maps.Marker({
-    position: location,
-    map: map
-  });
-  markers.push(marker);
-}
-
-// Sets the map on all markers in the array.
-function setMapOnAll(map) {
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].setMap(map);
-  }
-}
-
-// Removes the markers from the map, but keeps them in the array.
-function clearMarkers() {
-  setMapOnAll(null);
-}
-
-// Shows any markers currently in the array.
-function showMarkers() {
-  setMapOnAll(map);
-}
-
-// Deletes all markers in the array by removing references to them.
-function deleteMarkers() {
-  clearMarkers();
-  markers = [];
-}
-
-
-////////////////////////////////////////////////////////////////////
+/////////////////////////////// 2. Drop ///////////////////////////////////
 
 function drop() {
 	
@@ -470,7 +447,8 @@ function addMarkerWithTimeout(position, timeout) {
   }, timeout);
   
 }
-////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////3. geocodeAddress ///////////////////////////////////////////
 
 function geocodeAddress(geocoder, resultsMap) {	
 	
@@ -520,7 +498,7 @@ function geocodeAddress(geocoder, resultsMap) {
 
 
 
-//////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// transition /////////////////////////////////////////////////////
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 			
@@ -543,28 +521,40 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 		  });
 		}
 		
-////////////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////// Food search //////////////////////////////////////////////
+/*
 function foodSearch(){
 	
-	  var infowindow = new google.maps.InfoWindow();
-
-	  var service = new google.maps.places.PlacesService(map);	  
-	  	
-//	     clearMarkers() ; 
-	  	
-	  	 var foodType = document.getElementById('foodType').value;
-	  	
-	  	service.nearbySearch({
-	    location: kangnam,
-	    radius: 500,
-	    types: ['food'],
-	    name : [foodType] 
-	  }, callback);
 	
+// 	var kangnam = {lat: 37.497780, lng: 127.027715} ; 
+
+// 	  map = new google.maps.Map(document.getElementById('map'), {
+	  	
+// 	    center: kangnam,
+// 	    zoom: 17
+	    
+// 	  }); 
+
+	  infowindow = new google.maps.InfoWindow();
+
+	  service = new google.maps.places.PlacesService(map);
+	  
+	  
+// 	  document.getElementById('submit4').addEventListener('click', function(){
+	  	
+	  var foodType = document.getElementById('foodType').value ;
+	  	
+		  	service.nearbySearch({
+		    location: kangnam,
+		    radius: 500,
+		    types: ['food'],
+		    name : [foodType] 
+		  }, callback);
+	  	
+// 	  }); 
 	
 }
-
+*/
 
 
 function callback(results, status) {
@@ -576,19 +566,70 @@ function callback(results, status) {
 }
 
 function createMarker(place) {
-  var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location
-  });
+	  
+	  
+	  addMarker2(place, place.geometry.location); 
+	 
+	}
 
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.setContent(place.name);
-    infowindow.open(map, this);
-  });
+
+function addMarker2(place ,location) {
+	
+	  var marker = new google.maps.Marker({
+	  	
+	    position: location,
+	    map: map
+	    
+	  });
+	  
+	  //
+	    google.maps.event.addListener(marker, 'click', function() {
+	    infowindow.setContent(place.name);
+	    infowindow.open(map, this); }); 
+	  //
+	  
+	  markers.push(marker);
+	  
+	}
+
+
+/////////////////////////////////////////////////////////////////////////
+
+// Adds a marker to the map and push to the array.
+// function addMarker(location) {
+	
+//   var marker = new google.maps.Marker({
+//     position: location,
+//     map: map
+//   });
+  
+//   markers.push(marker);
+// }
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
 }
 
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setMapOnAll(null);
+}
 
+// Shows any markers currently in the array.
+function showMarkers() {
+  setMapOnAll(map);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
 
     </script>
     

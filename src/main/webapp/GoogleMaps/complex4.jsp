@@ -199,6 +199,72 @@
 
 
   ];
+  
+  
+  var Insadong = [
+                  
+          		{ lat: 37.561686,  lng: 126.986431}, 
+          		{ lat: 	37.574057, lng:126.985843 }, 
+          		{ lat: 37.564031,  lng: 126.983833 },
+          		{ lat: 37.572023,  lng:126.986449 }, 
+          		{ lat: 37.571705, lng: 126.986566}, 
+          		{ lat: 37.573249, lng: 126.986097 }, 
+          		{ lat: 37.574616, lng: 126.985169 }, 
+          		{ lat: 37.571804, lng: 126.986774 }, 
+          		{ lat: 37.574206, lng: 126.984294 }, 
+          		{ lat: 37.575258, lng: 126.983615}
+
+
+  ];
+  
+  var kyungbokyok = [
+                  
+          		{ lat: 37.579772,  lng: 126.971048}, 
+          		{ lat: 	37.577734, lng:126.971536 }, 
+          		{ lat: 37.5765,  lng: 126.970888 },
+          		{ lat: 37.577822,  lng:126.980505 }, 
+          		{ lat: 37.576099, lng: 126.973327}, 
+          		{ lat: 37.574645, lng: 126.970956 }, 
+          		{ lat: 37.576016, lng: 126.973047 }, 
+          		{ lat: 37.577362, lng: 126.972625 }, 
+          		{ lat: 37.579469, lng: 126.972506 }, 
+          		{ lat: 37.578374, lng: 126.973669}
+
+
+  ];
+  
+  var hongdaeyok = [
+                    
+             		{ lat: 37.548402,  lng: 126.919895}, 
+             		{ lat: 	37.555738, lng:126.925689 }, 
+             		{ lat: 37.551111,  lng: 126.922638},
+             		{ lat: 37.552088,  lng:126.921257 }, 
+             		{ lat: 37.550383, lng: 126.919789}, 
+             		{ lat: 37.552223, lng:126.922645 }, 
+             		{ lat: 37.551371, lng: 126.922032 }, 
+             		{ lat: 37.556202, lng: 126.928236 }, 
+             		{ lat: 37.556385, lng: 126.92978 }, 
+             		{ lat: 37.549406, lng: 126.918513}
+
+
+  ];
+  
+  var gundaeyok = [
+                    
+             		{ lat: 37.540893,  lng:127.070208}, 
+             		{ lat: 37.540558,  lng:127.067067 }, 
+             		{ lat: 37.543116,  lng: 127.070582},
+             		{ lat: 37.542923,  lng:127.071646 }, 
+             		{ lat: 37.542931, lng:127.071645}, 
+             		{ lat: 37.539327, lng:127.067351 }, 
+             		{ lat: 37.542627, lng: 127.071032 }, 
+             		{ lat: 37.538893, lng: 127.07567 }, 
+             		{ lat:37.537762, lng: 127.072598 }, 
+             		{ lat:37.540227, lng:127.06742}
+
+
+  ];
+  
     
     </script>
     
@@ -210,12 +276,15 @@
 		var service ; 
 	    var markers = [] ;
 	    var address ;
+	    var results = [] ; 
 
 function initMap() {
 	
 	var directionsDisplay = new google.maps.DirectionsRenderer() ;
 	var directionsService = new google.maps.DirectionsService();
 	 infowindow = new google.maps.InfoWindow();
+	 
+	 
 	
 	var kangnam = {lat: 37.497780, lng: 127.027715} ; 
 
@@ -231,10 +300,88 @@ function initMap() {
   
   document.getElementById('submit4').addEventListener('click', function(){
   	
+	 address = document.getElementById('address').value;
+	 
+	 if(address == "강남역" || address == "gangnam"){
+		 
+		 slocation = gangnam[0] ; 
+		 
+	 }else if(address == "잠실역" || address == "jamsil"){
+		 
+		 slocation = jamsil[0] ; 
+		 
+	 }else if( address == "잠실역" || address == "jamsil") {
+		  
+		  for (var i = 0; i < jamsil.length; i++) {
+			  	
+			  slocation = jamsil[0] ; 
+			  
+		  }
+		  
+	  }else if(  address == "이태원" || address == "itaewon" ){
+	  
+		  	  
+		  for (var i = 0; i < itaewon.length; i++) {
+			  	
+			  slocation = itaewon[0] ;
+			  
+		  }
+		  
+	  }else if( address == "동대문역" || address == "dongdaemun" ){
+		  	  
+		  for (var i = 0; i < dongdaemun.length; i++) {
+			  	
+			  slocation = dongdaemun[0] ;
+			  
+		  }
+		  
+	  }else if( address == "남산" || address == "namsan" ){
+		  	  
+		  for (var i = 0; i < namsan.length; i++) {
+			  	
+			  slocation = namsan[0] ;
+			  
+		  }
+		  
+		  
+	  }else if( address == "인사동" || address == "insa dong" ){
+		  	  
+		  for (var i = 0; i < Insadong.length; i++) {
+			  	
+			  slocation = Insadong[0] ;
+			  
+		  }
+		  
+	  }else if( address == "경복역" || address == "kyungbok station" ){
+		  	  
+		  for (var i = 0; i < kyungbokyok.length; i++) {
+			  	
+			  slocation = kyungbokyok[0] ;
+			  
+		  }
+	  }else if( address == "홍대역" || address == "hongdae station" || address == "hongdae"){
+		  	  
+		  for (var i = 0; i < hongdaeyok.length; i++) {
+			  	
+			  slocation = hongdaeyok[0] ;
+			  
+		  }
+	  }else if( address == "건대역" || address == "gundae station" || address == "gundae"){
+		  	  
+		  for (var i = 0; i < gundaeyok.length; i++) {
+			  	
+			  slocation = gundaeyok[0] ;
+			  
+		  }
+	  }
+	 
+	 
   	 var foodType = document.getElementById('foodType').value;
   	
 	  	service.nearbySearch({
-	    location: kangnam,
+// 	    location: kangnam,
+  		location: slocation,
+// 		location : results[0].geometry.location, 
 	    radius: 500,
 	    types: ['food'],
 	    name : [foodType] 
@@ -242,7 +389,7 @@ function initMap() {
   	
   }); 
    
-///////////////////////////// 2. add Marker  /////////////////////////////////////////////// 
+///////////////////////////// place search   /////////////////////////////////////////////// 
 
   var geocoder = new google.maps.Geocoder();
 
@@ -251,6 +398,9 @@ function initMap() {
     geocodeAddress(geocoder, map);
     
   });
+  
+  
+///////////////////////////// 2. add Marker  ///////////////////////////////////////////////  
   
    map.addListener('click', function(event) {
 	   
@@ -329,7 +479,7 @@ function drop() {
 // 	  }
   
   
-  address = document.getElementById('address').value;
+  address = document.getElementById('address').value; // 한글 변환 문제 
   
 	  if(address == "강남역" || address == "gangnam"){
 		  
@@ -341,7 +491,6 @@ function drop() {
 		  
 	  }
 	  else if( address == "잠실역" || address == "jamsil") {
-// 	  else if( address == "jamsil") {	
 		  
 		  for (var i = 0; i < jamsil.length; i++) {
 			  	
@@ -349,7 +498,7 @@ function drop() {
 			  
 		  }
 		  
-	  }else if(  address == "이태원" || address == "itaewon" ){
+	  }else if(  address == "이태원" || address == "itaewon" ){
 	  
 		  	  
 		  for (var i = 0; i < itaewon.length; i++) {
@@ -358,7 +507,7 @@ function drop() {
 			  
 		  }
 		  
-	  }else if( address == "동대문" || address == "dongdaemun" ){
+	  }else if( address == "동대문역" || address == "dongdaemun" ){
 		  	  
 		  for (var i = 0; i < dongdaemun.length; i++) {
 			  	
@@ -366,6 +515,35 @@ function drop() {
 			  
 		  }
 		  
+	  }else if( address == "인사동" || address == "insa dong" ){
+		  	  
+		  for (var i = 0; i < Insadong.length; i++) {
+			  	
+			  addMarkerWithTimeout(Insadong[i], i * 200);
+			  
+		  }
+		  
+	  }else if( address == "경복궁역" || address == "kyungbok station" ){
+		  	  
+		  for (var i = 0; i < kyungbokyok.length; i++) {
+			  	
+			  addMarkerWithTimeout(kyungbokyok[i], i * 200);
+			  
+		  }
+	  }else if( address == "홍대역" || address == "hongdae station" || address == "hongdae"){
+		  	  
+		  for (var i = 0; i < hongdaeyok.length; i++) {
+			  	
+			  addMarkerWithTimeout(hongdaeyok[i], i * 200);
+			  
+		  }
+	  }else if( address == "건대역" || address == "gundae station" || address == "gundae"){
+		  	  
+		  for (var i = 0; i < gundaeyok.length; i++) {
+			  	
+			  addMarkerWithTimeout(gundaeyok[i], i * 200);
+			  
+		  }
 	  }
   
 }
@@ -394,7 +572,8 @@ function addMarkerWithTimeout(position, timeout) {
 
   function geocodeAddress(geocoder, resultsMap) {	
   	
-    var address = document.getElementById('address').value;
+//     var address = document.getElementById('address').value;
+    address = document.getElementById('address').value;
     
     geocoder.geocode({'address': address}, function(results, status) {
     	
@@ -407,7 +586,7 @@ function addMarkerWithTimeout(position, timeout) {
           position: results[0].geometry.location
         });
         
-       // ì ë³´ íì  ëì°ê¸° -> Kangnam 
+       // Ã¬Â ÂÃ«Â³Â´ Ã­ÂÂÃ¬ÂÂ  Ã«ÂÂÃ¬ÂÂ°ÃªÂ¸Â° -> Kangnam 
         var infowindow = new google.maps.InfoWindow({
   		    content: contentString
   	  });
@@ -469,7 +648,24 @@ function addMarker2(place ,location) {
   
 } 
 
-//////////////////////////////// commons ///////////////////////////////////////
+//////////////////////////////// add Marker ///////////////////////////////////////
+
+
+function addMarker(location) {
+	
+  var marker = new google.maps.Marker({
+  	
+    position: location,
+    map: map
+    
+  });
+  
+  markers.push(marker);
+  
+} 
+
+
+
 
 function deleteMarkers() {
 	
